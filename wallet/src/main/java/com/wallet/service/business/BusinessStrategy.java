@@ -1,7 +1,8 @@
 package com.wallet.service.business;
 
 public enum BusinessStrategy {
-    EXIT_PROGRAM(new ExitProgram(), "exit");
+    EXIT_PROGRAM(new ExitProgram(), "exit"),
+    CREATE_WALLET(new CreateWallet(), "new");
 
     private final Business business;
     private final String command;
@@ -12,19 +13,19 @@ public enum BusinessStrategy {
     }
 
     public static Business findBusiness(String command) {
-        for (BusinessStrategy strategy : BusinessStrategy.values()){
-            if (strategy.getCommand().equals(command)){
+        for (BusinessStrategy strategy : BusinessStrategy.values()) {
+            if (strategy.getCommand().equals(command)) {
                 return strategy.getBusiness();
             }
         }
         return null;
     }
 
-    public Business getBusiness(){
+    public Business getBusiness() {
         return this.business;
     }
 
-    public String getCommand(){
+    public String getCommand() {
         return this.command;
     }
 }
