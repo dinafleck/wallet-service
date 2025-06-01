@@ -18,7 +18,7 @@ public class Withdraw implements Business {
             System.out.println("Enter user ID:");
             String userId = scanner.nextLine();
 
-            Wallet wallet = (Wallet) FileUtils.read(userId, "wallet.csv");
+            Wallet wallet = (Wallet) FileUtils.read(userId, "wallet.csv", null);
 
             if (wallet != null) {
                 System.out.println(wallet.getLastUpdate() + " - " + wallet.getBalance());

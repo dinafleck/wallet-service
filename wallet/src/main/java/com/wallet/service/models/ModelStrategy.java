@@ -2,7 +2,8 @@ package com.wallet.service.models;
 
 public enum ModelStrategy {
     WALLET(new Wallet(), "wallet"),
-    USER(new User(), "user");
+    USER(new User(), "user"),
+    TRANSACTION(new Transaction(), "transaction");
 
     private final Model model;
     private final String type;

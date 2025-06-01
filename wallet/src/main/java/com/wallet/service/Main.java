@@ -15,6 +15,7 @@ public class Main {
             System.out.println("new - to create a wallet.");
             System.out.println("deposit - to insert money on a wallet.");
             System.out.println("withdraw - to insert money on a wallet.");
+            System.out.println("transfer - to transfer money another wallet.");
 
             String enter = scanner.nextLine();
 

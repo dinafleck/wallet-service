@@ -4,12 +4,13 @@ public enum BusinessStrategy {
     EXIT_PROGRAM(new ExitProgram(), "exit"),
     CREATE_WALLET(new CreateWallet(), "new"),
     DEPOSIT(new Deposit(), "deposit"),
-    WITHDRAW(new Withdraw(), "withdraw");
+    WITHDRAW(new Withdraw(), "withdraw"),
+    TRANSFER(new Transfer(), "transfer");
 
     private final Business business;
     private final String command;
 
-    private BusinessStrategy(Business business, String command) {
+    BusinessStrategy(Business business, String command) {
         this.business = business;
         this.command = command;
     }

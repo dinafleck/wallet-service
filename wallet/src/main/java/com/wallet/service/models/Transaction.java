@@ -7,10 +7,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Transaction implements Model {
-    private final int id;
-    private final LocalDate date;
-    private final TransactionType type;
-    private final BigDecimal amount;
+    private int id;
+    private LocalDate date;
+    private TransactionType type;
+    private BigDecimal amount;
+
+    public Transaction() {
+
+    }
 
     public Transaction(String userId, TransactionType type, BigDecimal amount) {
         this.id = FileUtils.next(userId + "/transactions");
@@ -29,6 +33,14 @@ public class Transaction implements Model {
     public void createTransaction(String userId) throws IOException {
         String content = id + ";" + date.toString() + ";" + type.toString() + ";" + amount.toString();
         FileUtils.write(userId + "/transactions", id + ".csv", content);
+    }
+
+    public TransactionType getType() {
+        return type;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
     }
 
     @Override

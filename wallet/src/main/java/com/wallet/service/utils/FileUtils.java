@@ -4,6 +4,8 @@ import com.wallet.service.models.Model;
 import com.wallet.service.models.ModelStrategy;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileUtils {
 
@@ -32,18 +34,37 @@ public class FileUtils {
         return "database/" + path;
     }
 
-    public static Model read(String path, String fileName) {
+    public static Model read(String path, String fileName, String forceType) {
         String databasePath = getDatabasePath(path);
         try (BufferedReader br = new BufferedReader(new FileReader(databasePath + "/" + fileName))) {
             String line = br.readLine();
 
-            Model model = ModelStrategy.findModel(fileName.replace(".csv", ""));
+            String type = forceType == null ? fileName.replace(".csv", "") : forceType;
+
+            Model model = ModelStrategy.findModel(type);
 
             return model == null ? null : model.fromString(line);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<Model> readAll(String path, String forceType) {
+        String databasePath = getDatabasePath(path);
+        File folder = new File(databasePath);
+        File[] files = folder.listFiles();
+
+        if (files != null) {
+            List<Model> models = new ArrayList<>();
+            for (File file : files) {
+                if (file.isFile()) {
+                    models.add(read(path, file.getName(), forceType));
+                }
+            }
+            return models;
+        }
+        return new ArrayList<>();
     }
 
     public static int next(String path) {
