@@ -8,7 +8,7 @@ import java.io.*;
 public class FileUtils {
 
     public static void write(String path, String fileName, String content) throws IOException {
-        String databasePath = "database/" + path;
+        String databasePath = getDatabasePath(path);
         if (new File(databasePath).mkdirs()) {
             System.out.println("Directory created");
         } else {
@@ -28,8 +28,12 @@ public class FileUtils {
         }
     }
 
+    private static String getDatabasePath(String path) {
+        return "database/" + path;
+    }
+
     public static Model read(String path, String fileName) {
-        String databasePath = "database/" + path;
+        String databasePath = getDatabasePath(path);
         try (BufferedReader br = new BufferedReader(new FileReader(databasePath + "/" + fileName))) {
             String line = br.readLine();
 
@@ -40,5 +44,27 @@ public class FileUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static int next(String path) {
+        String databasePath = getDatabasePath(path);
+        File folder = new File(databasePath);
+        File[] files = folder.listFiles();
+        int counter = 0;
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    String fileName = file.getName().replace(".csv", "");
+                    if (Integer.parseInt(fileName) > counter) {
+                        counter = Integer.parseInt(fileName);
+                    }
+                }
+            }
+
+        } else {
+            System.out.println("Could not find the directory");
+        }
+
+        return counter + 1;
     }
 }

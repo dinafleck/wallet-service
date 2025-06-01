@@ -1,5 +1,7 @@
 package com.wallet.service.business;
 
+import com.wallet.service.models.Transaction;
+import com.wallet.service.models.TransactionType;
 import com.wallet.service.models.Wallet;
 import com.wallet.service.utils.FileUtils;
 
@@ -24,6 +26,10 @@ public class Deposit implements Business {
                 System.out.print("Enter deposit amount: ");
                 String amount = scanner.nextLine();
                 BigDecimal depositAmount = new BigDecimal(amount);
+
+                Transaction transaction = new Transaction(userId, TransactionType.DEPOSIT, depositAmount);
+                transaction.createTransaction(userId);
+
                 wallet.deposit(depositAmount);
                 wallet.updateWallet(userId);
 
