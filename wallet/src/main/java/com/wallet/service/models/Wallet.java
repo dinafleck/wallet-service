@@ -52,6 +52,10 @@ public class Wallet implements Model {
         balance = balance.add(amount);
     }
 
+    public void withdraw(BigDecimal amount) {
+        balance = balance.subtract(amount);
+    }
+
     @Override
     public Model fromString(String line) {
         String[] parts = line.split(";");

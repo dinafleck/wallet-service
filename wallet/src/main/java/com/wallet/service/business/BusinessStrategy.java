@@ -3,7 +3,8 @@ package com.wallet.service.business;
 public enum BusinessStrategy {
     EXIT_PROGRAM(new ExitProgram(), "exit"),
     CREATE_WALLET(new CreateWallet(), "new"),
-    DEPOSIT(new Deposit(), "deposit");
+    DEPOSIT(new Deposit(), "deposit"),
+    WITHDRAW(new Withdraw(), "withdraw");
 
     private final Business business;
     private final String command;

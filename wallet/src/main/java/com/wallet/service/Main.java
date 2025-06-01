@@ -14,6 +14,7 @@ public class Main {
             System.out.println("exit - to end the program.");
             System.out.println("new - to create a wallet.");
             System.out.println("deposit - to insert money on a wallet.");
+            System.out.println("withdraw - to insert money on a wallet.");
 
             String enter = scanner.nextLine();
 
